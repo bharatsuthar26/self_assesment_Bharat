@@ -11,32 +11,32 @@ router.get("/", (req,res)=>{
 
 router.post("/submitdata",(req,res)=>{
     // res.send("Post Request")
-    let fname = req.body.fname;
-    let date= req.body.dob;
-    let gender= req.body.gender.value;
-    let email = req.body.email;
-    let rollno= req.body.rollno;
-    let contact= req.body.contact;
-    let address= req.body.address;
-
-
-    // res.send(`Name is ${fname}, Date of birth is ${date} gender is ${gender} email is ${email} rollno is ${rollno}
-    //  contact number is ${contact} and address is ${address} `);
-    res.sendFile('mynewfile1.txt',{root:'./'});
+const data={
+       fname : req.body.fname,
+       date: req.body.date,
+       gender: req.body.gender,
+       email : req.body.email,
+       rollno: req.body.rollno,
+       contact: req.body.contact,
+       address: req.body.address
+      
+      };
+      console.log(data);
     
-    
-
-    fs.appendFile('mynewfile1.txt', `Name:${fname}, Date of birth : ${date}, gender: ${gender},  Email:${email}, Rollno:${rollno}, Contact:${contact}, Address:${address}\n` , function (err) {
+    fs.appendFile('mynewfile1.txt', `Name:${data.fname}, Date of birth : ${data.date}, gender: ${data.gender},  Email:${data.email}, Rollno:${data.rollno}, Contact:${data.contact}, Address:${data.address}\n` , function (err) {
         if (err) throw err;
         console.log('Saved!');
+        res.sendFile('mynewfile1.txt',{root:'./'});
+
       });
       
+
 
    // const { name, email, rollNo, phoneNo, address } = req.body;
     // console.log( name, email, rollo, phoneNo, address )
     
 
     // res.json( "Successfully sent" );
-  })
+})
 
 module.exports= router;
